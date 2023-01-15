@@ -50,6 +50,7 @@ spec:
         keep-alive-requests: 10000
         proxy-body-size: "100M"
         ssl-protocols: "TLSv1.3 TLSv1.2"
+        compute-full-forwarded-for: "true"
         use-forwarded-headers: "true"
         log-format-escape-json: "true"
         log-format-upstream: >-
