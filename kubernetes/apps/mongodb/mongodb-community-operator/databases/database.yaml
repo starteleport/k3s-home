@@ -1,0 +1,97 @@
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb-server
+  namespace: mongodb
+spec:
+  members: 1
+  type: ReplicaSet
+  version: 6.0.3
+  security:
+    tls:
+      enabled: false
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: admin
+      passwordSecretRef:
+        name: mongodb-users-admin-secret
+      scramCredentialsSecretName: mongodb-users-admin
+      roles:
+        - name: root
+          db: admin
+    - name: doggy
+      passwordSecretRef:
+        name: mongodb-users-doggy-secret
+      scramCredentialsSecretName: mongodb-users-doggy
+      roles:
+        - name: readWrite
+          db: doggy-frictions-prod
+  statefulSet:
+    spec:
+      template:
+        spec:
+          #  Hostpath volumes are owned by root
+          #  but MongoDB containers run as non root
+          #  so we use an init container to change the owner of
+          #  the directory (init containers run as root)
+          initContainers:
+            - command:
+                - chown
+                - -R
+                - "2000"
+                - /data
+              image: busybox
+              volumeMounts:
+                - mountPath: /data
+                  name: data-volume
+              securityContext:
+                runAsNonRoot: false
+                runAsUser: 0
+                runAsGroup: 0
+              name: change-dir-permissions
+          containers:
+            - name: mongod
+              resources:
+                limits:
+                  cpu: 750m
+                  memory: 500M
+                requests:
+                  cpu: 100m
+                  memory: 100M
+            - name: mongodb-agent
+              resources:
+                limits:
+                  cpu: 750m
+                  memory: 500M
+                requests:
+                  cpu: 100m
+                  memory: 100M
+      volumeClaimTemplates:
+        - kind: PersistentVolumeClaim
+          apiVersion: v1
+          metadata:
+            name: data-volume
+            annotations:
+              volumeType: local
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 8G
+            storageClassName: local-path
+        - kind: PersistentVolumeClaim
+          apiVersion: v1
+          metadata:
+            name: logs-volume
+            annotations:
+              volumeType: local
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 2G
+            storageClassName: local-path

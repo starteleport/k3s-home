@@ -26,10 +26,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    resources:
-      limits:
-        cpu: 500m
-        memory: 1Gi
-      requests:
-        cpu: 50m
-        memory: 200Mi
+    operator:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 50m
+          memory: 100Mi
