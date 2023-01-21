@@ -25,3 +25,11 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  values:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 50m
+        memory: 200Mi
