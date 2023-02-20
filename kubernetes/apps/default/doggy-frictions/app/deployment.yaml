@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-apps-doggy-frictions
+  namespace: default
+  labels:
+    app: doggy-frictions
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: doggy-frictions
+  # wait 2 seconds after the ready status to decide if deployment has been updated or not
+  minReadySeconds: 2
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0%
+  template:
+    metadata:
+      labels:
+        app: doggy-frictions
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: app
+          image: mcr.microsoft.com/dotnet/samples:aspnetapp # {"$imagepolicy": "flux-system:cluster-apps-doggy-frictions"}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 512Mi
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            timeoutSeconds: 3
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            timeoutSeconds: 3
+            httpGet:
+              path: /
+              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 5

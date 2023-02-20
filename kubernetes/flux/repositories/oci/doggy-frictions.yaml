@@ -2,10 +2,14 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: doggy-frictions
+  name: cluster-apps-doggy-frictions
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1m
   image: ghcr.io/starteleport/doggy-frictions
   secretRef:
     name: ghcr-my
+  accessFrom:
+    namespaceSelectors:
+      - matchLabels:
+          kubernetes.io/metadata.name: default
