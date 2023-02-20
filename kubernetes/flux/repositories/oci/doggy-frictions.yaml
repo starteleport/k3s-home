@@ -2,7 +2,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: cluster-apps-doggy-frictions
+  name: doggy-frictions
   namespace: flux-system
 spec:
   interval: 1m

@@ -2,12 +2,12 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: cluster-apps-doggy-frictions
+  name: doggy-frictions
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: cluster-apps-doggy-frictions
+    name: doggy-frictions
     namespace: flux-system
   policy:
     semver:
-      range: "1.0.11-beta.gbfb6ff73ae"
+      range: ">=0-0"

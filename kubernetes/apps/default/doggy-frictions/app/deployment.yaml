@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cluster-apps-doggy-frictions
+  name: doggy-frictions
   namespace: default
   labels:
     app: doggy-frictions
@@ -26,7 +26,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: app
-          image: mcr.microsoft.com/dotnet/samples:aspnetapp # {"$imagepolicy": "flux-system:cluster-apps-doggy-frictions"}
+          image: mcr.microsoft.com/dotnet/samples:aspnetapp # {"$imagepolicy": "flux-system:doggy-frictions"}
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -52,5 +52,5 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 15
+            initialDelaySeconds: 5
             periodSeconds: 5
