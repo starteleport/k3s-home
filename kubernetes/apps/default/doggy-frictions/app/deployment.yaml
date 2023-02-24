@@ -24,10 +24,18 @@ spec:
         app: doggy-frictions
     spec:
       serviceAccountName: default
+      imagePullSecrets:
+        - name: ghcr-doggy-frictions
       containers:
         - name: app
           image: ghcr.io/starteleport/doggy-frictions:1.0.11-beta.gbfb6ff73ae # {"$imagepolicy": "flux-system:doggy-frictions"}
           imagePullPolicy: IfNotPresent
+          env:
+            - name: ConnectionStrings__mongo
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-server-admin-doggy
+                  key: "connectionString.standard"
           resources:
             requests:
               cpu: 50m

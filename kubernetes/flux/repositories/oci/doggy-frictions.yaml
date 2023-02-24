@@ -8,7 +8,7 @@ spec:
   interval: 1m
   image: ghcr.io/starteleport/doggy-frictions
   secretRef:
-    name: ghcr-my
+    name: ghcr-doggy-frictions
   accessFrom:
     namespaceSelectors:
       - matchLabels:
