@@ -26,7 +26,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: app
-          image: mcr.microsoft.com/dotnet/samples:aspnetapp # {"$imagepolicy": "flux-system:doggy-frictions"}
+          image: ghcr.io/starteleport/doggy-frictions:1.0.11-beta.gbfb6ff73ae # {"$imagepolicy": "flux-system:doggy-frictions"}
           imagePullPolicy: IfNotPresent
           resources:
             requests:
