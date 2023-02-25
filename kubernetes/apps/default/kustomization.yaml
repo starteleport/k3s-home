@@ -6,4 +6,5 @@ resources:
   - ./echo-server/ks.yaml
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
+  - ./mongodb-databases/ks.yaml
   - ./doggy-frictions/ks.yaml
