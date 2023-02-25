@@ -27,7 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-doggy-frictions-cd
-    - name: cluster-apps-mongodb-community-operator-databases
+    - name: cluster-apps-mongodb-database
   path: ./kubernetes/apps/default/doggy-frictions/app
   prune: true
   sourceRef:

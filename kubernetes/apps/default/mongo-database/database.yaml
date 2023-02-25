@@ -3,7 +3,7 @@ apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: mongodb-server
-  namespace: mongodb
+  namespace: default
 spec:
   members: 1
   type: ReplicaSet
