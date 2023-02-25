@@ -27,7 +27,7 @@ spec:
       scramCredentialsSecretName: mongodb-users-doggy
       roles:
         - name: readWrite
-          db: doggy-frictions-prod
+          db: doggyfrictions
   statefulSet:
     spec:
       template:
