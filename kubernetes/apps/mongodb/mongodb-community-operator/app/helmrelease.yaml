@@ -28,6 +28,9 @@ spec:
   values:
     operator:
       watchNamespace: "*"
+      database:
+        name: mongodb-database
+        namespace: default
       resources:
         limits:
           cpu: 500m
