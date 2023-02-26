@@ -3,7 +3,7 @@ apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: mongodb-server
-  namespace: mongodb
+  namespace: default
 spec:
   members: 1
   type: ReplicaSet
@@ -27,7 +27,7 @@ spec:
       scramCredentialsSecretName: mongodb-users-doggy
       roles:
         - name: readWrite
-          db: doggy-frictions-prod
+          db: doggyfrictions
   statefulSet:
     spec:
       template:
@@ -55,7 +55,6 @@ spec:
             - name: mongod
               resources:
                 limits:
-                  cpu: 750m
                   memory: 500M
                 requests:
                   cpu: 100m
@@ -63,7 +62,6 @@ spec:
             - name: mongodb-agent
               resources:
                 limits:
-                  cpu: 750m
                   memory: 500M
                 requests:
                   cpu: 100m

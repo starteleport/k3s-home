@@ -53,7 +53,7 @@ spec:
     - patch: |
         - op: replace
           path: /spec/template/spec/containers/0/resources/requests/cpu
-          value: 20m
+          value: 50m
         - op: replace
           path: /spec/template/spec/containers/0/resources/limits/cpu
           value: 750m

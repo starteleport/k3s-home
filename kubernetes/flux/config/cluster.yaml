@@ -5,10 +5,12 @@ metadata:
   name: home-kubernetes
   namespace: flux-system
 spec:
+  secretRef:
+    name: home-kubernetes
   interval: 30m
   ref:
-    branch: main
-  url: "https://github.com/starteleport/k3s-home"
+    branch: doggy-ci
+  url: "ssh://git@github.com/starteleport/k3s-home"
   ignore: |
     # exclude all
     /*
