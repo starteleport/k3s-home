@@ -9,7 +9,7 @@ spec:
     name: home-kubernetes
   interval: 30m
   ref:
-    branch: doggy-ci
+    branch: main
   url: "ssh://git@github.com/starteleport/k3s-home"
   ignore: |
     # exclude all
