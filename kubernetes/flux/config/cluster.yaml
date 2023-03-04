@@ -7,7 +7,7 @@ metadata:
 spec:
   secretRef:
     name: home-kubernetes
-  interval: 30m
+  interval: 1m
   ref:
     branch: main
   url: "ssh://git@github.com/starteleport/k3s-home"
@@ -23,7 +23,7 @@ metadata:
   name: cluster
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 1m
   path: ./kubernetes/flux
   prune: true
   wait: false
