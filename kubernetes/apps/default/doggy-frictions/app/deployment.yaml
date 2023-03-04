@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,7 +30,7 @@ spec:
         - name: ghcr-doggy-frictions
       containers:
         - name: app
-          image: ghcr.io/starteleport/doggy-frictions:1.0.11-beta.gbfb6ff73ae # {"$imagepolicy": "flux-system:doggy-frictions"}
+          image: ghcr.io/starteleport/doggy-frictions:1.0.3 # {"$imagepolicy": "flux-system:doggy-frictions"}
           imagePullPolicy: IfNotPresent
           env:
             - name: ConnectionStrings__mongo
