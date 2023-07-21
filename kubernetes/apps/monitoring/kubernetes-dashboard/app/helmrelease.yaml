@@ -49,6 +49,12 @@ spec:
       enabled: true
     serviceMonitor:
       enabled: false
+    metrics-server:
+      enabled: false
+    cert-manager:
+      enabled: false
+    nginx:
+      enabled: false
     resources:
       requests:
         cpu: 50m
