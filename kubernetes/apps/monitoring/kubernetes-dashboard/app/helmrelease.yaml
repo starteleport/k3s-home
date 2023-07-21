@@ -47,6 +47,14 @@ spec:
           secretName: kubernetes-dashboard-tls
     metricsScraper:
       enabled: true
+      containers:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 750m
+            memory: 200Mi
     serviceMonitor:
       enabled: false
     metrics-server:
@@ -55,10 +63,21 @@ spec:
       enabled: false
     nginx:
       enabled: false
-    resources:
-      requests:
-        cpu: 50m
-        memory: 50Mi
-      limits:
-        cpu: 750m
-        memory: 200Mi
+    api:
+      containers:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 750m
+            memory: 200Mi
+    web:
+      containers:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 750m
+            memory: 200Mi
