@@ -26,25 +26,19 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    env:
-      TZ: "${TIMEZONE}"
-    extraArgs:
-      - --enable-skip-login
-      - --disable-settings-authorizer
-      - --enable-insecure-login
-      - --token-ttl=43200
-    ingress:
-      enabled: true
-      className: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
-        hajimari.io/icon: mdi:kubernetes
-      hosts:
-        - &host "kubernetes.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - *host
-          secretName: kubernetes-dashboard-tls
+    app:
+      ingress:
+        enabled: true
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-staging
+          hajimari.io/icon: mdi:kubernetes
+        hosts:
+          - &host "kubernetes.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+            secretName: kubernetes-dashboard-tls
     metricsScraper:
       enabled: true
       containers:
@@ -65,6 +59,14 @@ spec:
       enabled: false
     api:
       containers:
+        env:
+          - name: TZ
+            value: "$TIMEZONE"
+        args:
+          - --enable-skip-login
+          - --disable-settings-authorizer
+          - --enable-insecure-login
+          - --token-ttl=32767
         resources:
           requests:
             cpu: 50m
@@ -74,6 +76,9 @@ spec:
             memory: 200Mi
     web:
       containers:
+        env:
+          - name: TZ
+            value: "$TIMEZONE"
         resources:
           requests:
             cpu: 50m
