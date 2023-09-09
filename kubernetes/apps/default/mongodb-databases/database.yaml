@@ -5,7 +5,7 @@ metadata:
   name: mongodb-server
   namespace: default
 spec:
-  members: 1
+  members: 2
   type: ReplicaSet
   version: 6.0.3
   security:
@@ -79,7 +79,7 @@ spec:
             resources:
               requests:
                 storage: 8G
-            storageClassName: local-path
+            storageClassName: local-ssd
         - kind: PersistentVolumeClaim
           apiVersion: v1
           metadata:
@@ -92,4 +92,4 @@ spec:
             resources:
               requests:
                 storage: 2G
-            storageClassName: local-path
+            storageClassName: local-ssd
