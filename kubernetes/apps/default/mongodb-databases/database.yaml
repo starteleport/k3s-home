@@ -42,10 +42,13 @@ spec:
                 - -R
                 - "2000"
                 - /data
+                - /logs
               image: busybox
               volumeMounts:
                 - mountPath: /data
                   name: data-volume
+                - mountPath: /logs
+                  name: logs-volume
               securityContext:
                 runAsNonRoot: false
                 runAsUser: 0
