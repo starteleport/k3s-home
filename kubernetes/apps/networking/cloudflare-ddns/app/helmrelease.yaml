@@ -26,19 +26,24 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: cronjob
-      cronjob:
-        concurrencyPolicy: Forbid
-        schedule: "@hourly"
-    restartPolicy: OnFailure
-    image:
-      repository: ghcr.io/onedr0p/kubernetes-kubectl
-      tag: 1.28.4@sha256:7039783f8ecb83acf0f5359ec7aa901f6e73af1c76470e7317caf19f7514fedd
-    command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
-    envFrom:
-      - secretRef:
-          name: cloudflare-ddns-secret
+    controllers:
+      main:
+        type: cronjob
+        restartPolicy: OnFailure
+        cronjob:
+          concurrencyPolicy: Forbid
+          schedule: "@hourly"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/kubernetes-kubectl
+              tag: 1.28.4@sha256:7039783f8ecb83acf0f5359ec7aa901f6e73af1c76470e7317caf19f7514fedd
+            command:
+              - /bin/bash
+              - /app/cloudflare-ddns.sh
+            envFrom:
+              - secretRef:
+                  name: cloudflare-ddns-secret
     service:
       main:
         enabled: false
