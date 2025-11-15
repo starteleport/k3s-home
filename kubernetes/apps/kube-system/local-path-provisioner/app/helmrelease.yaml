@@ -73,10 +73,13 @@ spec:
         rm -rf ${absolutePath}
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - apiVersion: storage.k8s.io/v1
-            kind: StorageClass
-            metadata:
+        patches:
+          - target:
+              group: storage.k8s.io
+              version: v1
+              kind: StorageClass
               name: local-path
-            parameters:
-              nodePath: *default_path
+            patch: |-
+              - op: replace
+                path: /parameters/nodePath
+                value: *default_path
