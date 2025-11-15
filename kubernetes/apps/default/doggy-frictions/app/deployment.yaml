@@ -30,7 +30,7 @@ spec:
         - name: ghcr-doggy-frictions
       containers:
         - name: app
-          image: ghcr.io/starteleport/doggy-frictions:1.0.3 # {"$imagepolicy": "flux-system:doggy-frictions"}
+          image: ghcr.io/starteleport/doggy-frictions:1.0.3 # {"$imagepolicy": "default:doggy-frictions"}
           imagePullPolicy: IfNotPresent
           env:
             - name: ConnectionStrings__mongo
