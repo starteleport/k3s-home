@@ -40,7 +40,7 @@ spec:
               tag: 1.28.4@sha256:7039783f8ecb83acf0f5359ec7aa901f6e73af1c76470e7317caf19f7514fedd
             command:
               - /bin/bash
-              - /app/cloudflare-ddns.sh
+              - /config/cloudflare-ddns.sh
             envFrom:
               - secretRef:
                   name: cloudflare-ddns-secret
