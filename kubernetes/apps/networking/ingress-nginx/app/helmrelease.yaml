@@ -48,10 +48,19 @@ spec:
         forwarded-for-proxy-protocol-header: "X-Forwarded-For-Proxy-Protocol"
         http-snippet: |-
           set_real_ip_from 172.24.198.122;
+          map "$scheme:$host:$ssl_server_name" $reject_host_sni_mismatch {
+            default 0;
+            "~^https:([^:]+):\1$" 0;
+            "~^https:" 1;
+          }
         hsts-max-age: "31449600"
         keep-alive: 120
         keep-alive-requests: 10000
         proxy-body-size: "100M"
+        server-snippet: |-
+          if ($reject_host_sni_mismatch) {
+            return 421;
+          }
         ssl-protocols: "TLSv1.3 TLSv1.2"
         compute-full-forwarded-for: "true"
         use-proxy-protocol: "true"
