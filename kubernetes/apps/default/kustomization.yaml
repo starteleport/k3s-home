@@ -8,3 +8,4 @@ resources:
   - ./home-assistant/ks.yaml
   - ./mongodb-databases/ks.yaml
   - ./doggy-frictions/ks.yaml
+  - ./ws-dns/ks.yaml
