@@ -6,7 +6,7 @@
 
 # (string) Use a specific version of k3s
 # renovate: datasource=github-releases depName=k3s-io/k3s
-k3s_release_version: "v1.28.3+k3s1"
+k3s_release_version: "v1.31.14+k3s1"
 
 # (bool) Install using hard links rather than symbolic links.
 k3s_install_hard_links: true
@@ -31,9 +31,12 @@ k3s_server_manifests_urls:
   # Kube-vip
   - url: https://kube-vip.io/manifests/rbac.yaml
     filename: kube-vip-rbac.yaml
+  # Calico CRDs must be kept in a separate k3s Addon starting with v3.30.
+  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.30.7/manifests/operator-crds.yaml
+    filename: tigera-operator-crds.yaml
   # Tigera Operator
-  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
-    filename: calico-tigera-operator.yaml
+  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.30.7/manifests/tigera-operator.yaml
+    filename: tigera-operator.yaml
   # Prometheus Operator
   - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.61.1/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
     filename: prometheus-alertmanagerconfigs.yaml
