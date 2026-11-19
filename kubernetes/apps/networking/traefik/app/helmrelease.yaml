@@ -1,0 +1,87 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: traefik
+      version: 42.4.1
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    core:
+      strictTLSOptions: true
+    ingressClass:
+      name: traefik-nginx
+      isDefaultClass: false
+    providers:
+      kubernetesIngress:
+        enabled: false
+      kubernetesCRD:
+        defaultTLSResourcesNamespace: networking
+      kubernetesIngressNGINX:
+        enabled: true
+        ingressClass: traefik-nginx
+        ingressClassByName: true
+        proxyBodySize: 104857600
+        proxyConnectTimeout: 120
+        proxyReadTimeout: 120
+        proxySendTimeout: 120
+    ports:
+      web:
+        proxyProtocol:
+          trustedIPs:
+            - 172.31.0.1/32
+      websecure:
+        proxyProtocol:
+          trustedIPs:
+            - 172.31.0.1/32
+        forwardedHeaders:
+          trustedIPs:
+            - 173.245.48.0/20
+            - 103.21.244.0/22
+            - 103.22.200.0/22
+            - 103.31.4.0/22
+            - 141.101.64.0/18
+            - 108.162.192.0/18
+            - 190.93.240.0/20
+            - 188.114.96.0/20
+            - 197.234.240.0/22
+            - 198.41.128.0/17
+            - 162.158.0.0/15
+            - 104.16.0.0/13
+            - 104.24.0.0/14
+            - 172.64.0.0/13
+            - 131.0.72.0/22
+            - 2400:cb00::/32
+            - 2606:4700::/32
+            - 2803:f800::/32
+            - 2405:b500::/32
+            - 2405:8100::/32
+            - 2a06:98c0::/29
+            - 2c0f:f248::/32
+    service:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "172.31.0.4"
+      spec:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+    tlsStore:
+      default:
+        defaultCertificate:
+          secretName: "${SECRET_DOMAIN/./-}-production-tls"

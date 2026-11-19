@@ -14,3 +14,4 @@ resources:
   - ./metrics-server.yaml
   - ./mongodb.yaml
   - ./stakater.yaml
+  - ./traefik.yaml
