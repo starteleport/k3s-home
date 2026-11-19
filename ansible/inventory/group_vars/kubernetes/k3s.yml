@@ -32,10 +32,10 @@ k3s_server_manifests_urls:
   - url: https://kube-vip.io/manifests/rbac.yaml
     filename: kube-vip-rbac.yaml
   # Calico CRDs must be kept in a separate k3s Addon starting with v3.30.
-  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.30.7/manifests/operator-crds.yaml
+  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.32.4/manifests/operator-crds.yaml
     filename: tigera-operator-crds.yaml
   # Tigera Operator
-  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.30.7/manifests/tigera-operator.yaml
+  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.32.4/manifests/tigera-operator.yaml
     filename: tigera-operator.yaml
   # Prometheus Operator
   - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.61.1/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
